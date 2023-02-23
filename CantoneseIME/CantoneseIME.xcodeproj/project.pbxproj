@@ -1,0 +1,810 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		37B5D51D29A7ACAA003E2ED8 /* name.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 37B5D51C29A7ACAA003E2ED8 /* name.xcconfig */; };
+		37B5D52D29A7ADF9003E2ED8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37B5D51F29A7ADF9003E2ED8 /* InfoPlist.strings */; };
+		37B5D52E29A7ADF9003E2ED8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37B5D52129A7ADF9003E2ED8 /* Localizable.strings */; };
+		37B5D53029A7B1C9003E2ED8 /* cantoneseime.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 37B5D52F29A7B1C9003E2ED8 /* cantoneseime.pdf */; };
+		37D1112A29A7A7B000FECB6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37D1112929A7A7B000FECB6B /* Assets.xcassets */; };
+		37D1112D29A7A7B000FECB6B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37D1112C29A7A7B000FECB6B /* Preview Assets.xcassets */; };
+		37D1113829A7A7B000FECB6B /* CantoneseIMETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1113729A7A7B000FECB6B /* CantoneseIMETests.swift */; };
+		37D1114229A7A7B000FECB6B /* CantoneseIMEUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1114129A7A7B000FECB6B /* CantoneseIMEUITests.swift */; };
+		37D1114429A7A7B000FECB6B /* CantoneseIMEUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1114329A7A7B000FECB6B /* CantoneseIMEUITestsLaunchTests.swift */; };
+		37D1115329A7A92500FECB6B /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37D1115229A7A92500FECB6B /* CoreIME */; };
+		37D1117329A7A98100FECB6B /* DisplayObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1115529A7A98100FECB6B /* DisplayObject.swift */; };
+		37D1117429A7A98100FECB6B /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1115629A7A98100FECB6B /* Language.swift */; };
+		37D1117529A7A98100FECB6B /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1115729A7A98100FECB6B /* Candidate.swift */; };
+		37D1117629A7A98100FECB6B /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1115929A7A98100FECB6B /* Direction.swift */; };
+		37D1117729A7A98100FECB6B /* PunctuationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1115A29A7A98100FECB6B /* PunctuationKey.swift */; };
+		37D1117829A7A98100FECB6B /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1115B29A7A98100FECB6B /* KeyCode.swift */; };
+		37D1117929A7A98100FECB6B /* Representative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1115C29A7A98100FECB6B /* Representative.swift */; };
+		37D1117A29A7A98100FECB6B /* Suggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1115E29A7A98100FECB6B /* Suggestions.swift */; };
+		37D1117B29A7A98100FECB6B /* CandidateWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1115F29A7A98100FECB6B /* CandidateWindow.swift */; };
+		37D1117C29A7A98100FECB6B /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1116029A7A98100FECB6B /* Menu.swift */; };
+		37D1117D29A7A98100FECB6B /* WindowPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1116129A7A98100FECB6B /* WindowPattern.swift */; };
+		37D1117E29A7A98100FECB6B /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1116229A7A98100FECB6B /* EventHandler.swift */; };
+		37D1117F29A7A98100FECB6B /* notationsample.txt in Resources */ = {isa = PBXBuildFile; fileRef = 37D1116329A7A98100FECB6B /* notationsample.txt */; };
+		37D1118029A7A98100FECB6B /* CantoneseIMEInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1116429A7A98100FECB6B /* CantoneseIMEInputController.swift */; };
+		37D1118129A7A98100FECB6B /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1116529A7A98100FECB6B /* VisualEffect.swift */; };
+		37D1118229A7A98100FECB6B /* CantoneseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1116729A7A98100FECB6B /* CantoneseLabel.swift */; };
+		37D1118329A7A98100FECB6B /* SerialNumberLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1116829A7A98100FECB6B /* SerialNumberLabel.swift */; };
+		37D1118429A7A98100FECB6B /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1116929A7A98100FECB6B /* CandidateBoard.swift */; };
+		37D1118529A7A98100FECB6B /* CandidateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1116A29A7A98100FECB6B /* CandidateLabel.swift */; };
+		37D1118629A7A98100FECB6B /* CharacterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1116E29A7A98100FECB6B /* CharacterExtensions.swift */; };
+		37D1118729A7A98100FECB6B /* IMKTextInputExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1116F29A7A98100FECB6B /* IMKTextInputExtensions.swift */; };
+		37D1118829A7A98100FECB6B /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1117029A7A98100FECB6B /* ViewExtensions.swift */; };
+		37D1118929A7A98100FECB6B /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1117129A7A98100FECB6B /* StringExtensions.swift */; };
+		37D1118A29A7A98100FECB6B /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1117229A7A98100FECB6B /* ArrayExtensions.swift */; };
+		37D1118C29A7A99C00FECB6B /* CantoneseIMEApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1118B29A7A99C00FECB6B /* CantoneseIMEApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		37D1113429A7A7B000FECB6B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37D1111A29A7A7AF00FECB6B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37D1112129A7A7AF00FECB6B;
+			remoteInfo = CantoneseIME;
+		};
+		37D1113E29A7A7B000FECB6B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37D1111A29A7A7AF00FECB6B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37D1112129A7A7AF00FECB6B;
+			remoteInfo = CantoneseIME;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		37B5D51C29A7ACAA003E2ED8 /* name.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = name.xcconfig; sourceTree = "<group>"; };
+		37B5D52029A7ADF9003E2ED8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		37B5D52229A7ADF9003E2ED8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		37B5D52329A7ADF9003E2ED8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37B5D52429A7ADF9003E2ED8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37B5D52529A7ADF9003E2ED8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37B5D52629A7ADF9003E2ED8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37B5D52729A7ADF9003E2ED8 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37B5D52829A7ADF9003E2ED8 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37B5D52929A7ADF9003E2ED8 /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		37B5D52A29A7ADF9003E2ED8 /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/Localizable.strings; sourceTree = "<group>"; };
+		37B5D52B29A7ADF9003E2ED8 /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37B5D52C29A7ADF9003E2ED8 /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37B5D52F29A7B1C9003E2ED8 /* cantoneseime.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = cantoneseime.pdf; sourceTree = "<group>"; };
+		37D1112229A7A7AF00FECB6B /* CantoneseIME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CantoneseIME.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		37D1112929A7A7B000FECB6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		37D1112C29A7A7B000FECB6B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		37D1112E29A7A7B000FECB6B /* CantoneseIME.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CantoneseIME.entitlements; sourceTree = "<group>"; };
+		37D1113329A7A7B000FECB6B /* CantoneseIMETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CantoneseIMETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		37D1113729A7A7B000FECB6B /* CantoneseIMETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseIMETests.swift; sourceTree = "<group>"; };
+		37D1113D29A7A7B000FECB6B /* CantoneseIMEUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CantoneseIMEUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		37D1114129A7A7B000FECB6B /* CantoneseIMEUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseIMEUITests.swift; sourceTree = "<group>"; };
+		37D1114329A7A7B000FECB6B /* CantoneseIMEUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseIMEUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		37D1115029A7A8C600FECB6B /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = ../CoreIME; sourceTree = "<group>"; };
+		37D1115529A7A98100FECB6B /* DisplayObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayObject.swift; sourceTree = "<group>"; };
+		37D1115629A7A98100FECB6B /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		37D1115729A7A98100FECB6B /* Candidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
+		37D1115929A7A98100FECB6B /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		37D1115A29A7A98100FECB6B /* PunctuationKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PunctuationKey.swift; sourceTree = "<group>"; };
+		37D1115B29A7A98100FECB6B /* KeyCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
+		37D1115C29A7A98100FECB6B /* Representative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Representative.swift; sourceTree = "<group>"; };
+		37D1115E29A7A98100FECB6B /* Suggestions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Suggestions.swift; sourceTree = "<group>"; };
+		37D1115F29A7A98100FECB6B /* CandidateWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateWindow.swift; sourceTree = "<group>"; };
+		37D1116029A7A98100FECB6B /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		37D1116129A7A98100FECB6B /* WindowPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowPattern.swift; sourceTree = "<group>"; };
+		37D1116229A7A98100FECB6B /* EventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
+		37D1116329A7A98100FECB6B /* notationsample.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = notationsample.txt; sourceTree = "<group>"; };
+		37D1116429A7A98100FECB6B /* CantoneseIMEInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseIMEInputController.swift; sourceTree = "<group>"; };
+		37D1116529A7A98100FECB6B /* VisualEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffect.swift; sourceTree = "<group>"; };
+		37D1116729A7A98100FECB6B /* CantoneseLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseLabel.swift; sourceTree = "<group>"; };
+		37D1116829A7A98100FECB6B /* SerialNumberLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerialNumberLabel.swift; sourceTree = "<group>"; };
+		37D1116929A7A98100FECB6B /* CandidateBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateBoard.swift; sourceTree = "<group>"; };
+		37D1116A29A7A98100FECB6B /* CandidateLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateLabel.swift; sourceTree = "<group>"; };
+		37D1116E29A7A98100FECB6B /* CharacterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterExtensions.swift; sourceTree = "<group>"; };
+		37D1116F29A7A98100FECB6B /* IMKTextInputExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMKTextInputExtensions.swift; sourceTree = "<group>"; };
+		37D1117029A7A98100FECB6B /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		37D1117129A7A98100FECB6B /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		37D1117229A7A98100FECB6B /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		37D1118B29A7A99C00FECB6B /* CantoneseIMEApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseIMEApp.swift; sourceTree = "<group>"; };
+		37D1118D29A7AAB000FECB6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		37D1111F29A7A7AF00FECB6B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37D1115329A7A92500FECB6B /* CoreIME in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37D1113029A7A7B000FECB6B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37D1113A29A7A7B000FECB6B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		37B5D51E29A7ADF9003E2ED8 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				37B5D51F29A7ADF9003E2ED8 /* InfoPlist.strings */,
+				37B5D52129A7ADF9003E2ED8 /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		37D1111929A7A7AF00FECB6B = {
+			isa = PBXGroup;
+			children = (
+				37D1115029A7A8C600FECB6B /* CoreIME */,
+				37D1112429A7A7AF00FECB6B /* CantoneseIME */,
+				37D1113629A7A7B000FECB6B /* CantoneseIMETests */,
+				37D1114029A7A7B000FECB6B /* CantoneseIMEUITests */,
+				37D1112329A7A7AF00FECB6B /* Products */,
+				37D1115129A7A92500FECB6B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		37D1112329A7A7AF00FECB6B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				37D1112229A7A7AF00FECB6B /* CantoneseIME.app */,
+				37D1113329A7A7B000FECB6B /* CantoneseIMETests.xctest */,
+				37D1113D29A7A7B000FECB6B /* CantoneseIMEUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		37D1112429A7A7AF00FECB6B /* CantoneseIME */ = {
+			isa = PBXGroup;
+			children = (
+				37D1118D29A7AAB000FECB6B /* Info.plist */,
+				37B5D51C29A7ACAA003E2ED8 /* name.xcconfig */,
+				37D1116529A7A98100FECB6B /* VisualEffect.swift */,
+				37D1118B29A7A99C00FECB6B /* CantoneseIMEApp.swift */,
+				37D1116429A7A98100FECB6B /* CantoneseIMEInputController.swift */,
+				37D1115D29A7A98100FECB6B /* InputControllerExtensions */,
+				37D1115429A7A98100FECB6B /* Candidate */,
+				37D1116629A7A98100FECB6B /* CandidateUI */,
+				37D1116D29A7A98100FECB6B /* Extensions */,
+				37D1115829A7A98100FECB6B /* KeyCode */,
+				37B5D51E29A7ADF9003E2ED8 /* Localization */,
+				37D1112E29A7A7B000FECB6B /* CantoneseIME.entitlements */,
+				37D1112929A7A7B000FECB6B /* Assets.xcassets */,
+				37B5D52F29A7B1C9003E2ED8 /* cantoneseime.pdf */,
+				37D1116329A7A98100FECB6B /* notationsample.txt */,
+				37D1112B29A7A7B000FECB6B /* Preview Content */,
+			);
+			path = CantoneseIME;
+			sourceTree = "<group>";
+		};
+		37D1112B29A7A7B000FECB6B /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				37D1112C29A7A7B000FECB6B /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		37D1113629A7A7B000FECB6B /* CantoneseIMETests */ = {
+			isa = PBXGroup;
+			children = (
+				37D1113729A7A7B000FECB6B /* CantoneseIMETests.swift */,
+			);
+			path = CantoneseIMETests;
+			sourceTree = "<group>";
+		};
+		37D1114029A7A7B000FECB6B /* CantoneseIMEUITests */ = {
+			isa = PBXGroup;
+			children = (
+				37D1114129A7A7B000FECB6B /* CantoneseIMEUITests.swift */,
+				37D1114329A7A7B000FECB6B /* CantoneseIMEUITestsLaunchTests.swift */,
+			);
+			path = CantoneseIMEUITests;
+			sourceTree = "<group>";
+		};
+		37D1115129A7A92500FECB6B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		37D1115429A7A98100FECB6B /* Candidate */ = {
+			isa = PBXGroup;
+			children = (
+				37D1115529A7A98100FECB6B /* DisplayObject.swift */,
+				37D1115629A7A98100FECB6B /* Language.swift */,
+				37D1115729A7A98100FECB6B /* Candidate.swift */,
+			);
+			path = Candidate;
+			sourceTree = "<group>";
+		};
+		37D1115829A7A98100FECB6B /* KeyCode */ = {
+			isa = PBXGroup;
+			children = (
+				37D1115929A7A98100FECB6B /* Direction.swift */,
+				37D1115A29A7A98100FECB6B /* PunctuationKey.swift */,
+				37D1115B29A7A98100FECB6B /* KeyCode.swift */,
+				37D1115C29A7A98100FECB6B /* Representative.swift */,
+			);
+			path = KeyCode;
+			sourceTree = "<group>";
+		};
+		37D1115D29A7A98100FECB6B /* InputControllerExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				37D1115E29A7A98100FECB6B /* Suggestions.swift */,
+				37D1115F29A7A98100FECB6B /* CandidateWindow.swift */,
+				37D1116029A7A98100FECB6B /* Menu.swift */,
+				37D1116129A7A98100FECB6B /* WindowPattern.swift */,
+				37D1116229A7A98100FECB6B /* EventHandler.swift */,
+			);
+			path = InputControllerExtensions;
+			sourceTree = "<group>";
+		};
+		37D1116629A7A98100FECB6B /* CandidateUI */ = {
+			isa = PBXGroup;
+			children = (
+				37D1116729A7A98100FECB6B /* CantoneseLabel.swift */,
+				37D1116829A7A98100FECB6B /* SerialNumberLabel.swift */,
+				37D1116929A7A98100FECB6B /* CandidateBoard.swift */,
+				37D1116A29A7A98100FECB6B /* CandidateLabel.swift */,
+			);
+			path = CandidateUI;
+			sourceTree = "<group>";
+		};
+		37D1116D29A7A98100FECB6B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				37D1116E29A7A98100FECB6B /* CharacterExtensions.swift */,
+				37D1116F29A7A98100FECB6B /* IMKTextInputExtensions.swift */,
+				37D1117029A7A98100FECB6B /* ViewExtensions.swift */,
+				37D1117129A7A98100FECB6B /* StringExtensions.swift */,
+				37D1117229A7A98100FECB6B /* ArrayExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		37D1112129A7A7AF00FECB6B /* CantoneseIME */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37D1114729A7A7B000FECB6B /* Build configuration list for PBXNativeTarget "CantoneseIME" */;
+			buildPhases = (
+				37D1111E29A7A7AF00FECB6B /* Sources */,
+				37D1111F29A7A7AF00FECB6B /* Frameworks */,
+				37D1112029A7A7AF00FECB6B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CantoneseIME;
+			packageProductDependencies = (
+				37D1115229A7A92500FECB6B /* CoreIME */,
+			);
+			productName = CantoneseIME;
+			productReference = 37D1112229A7A7AF00FECB6B /* CantoneseIME.app */;
+			productType = "com.apple.product-type.application";
+		};
+		37D1113229A7A7B000FECB6B /* CantoneseIMETests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37D1114A29A7A7B000FECB6B /* Build configuration list for PBXNativeTarget "CantoneseIMETests" */;
+			buildPhases = (
+				37D1112F29A7A7B000FECB6B /* Sources */,
+				37D1113029A7A7B000FECB6B /* Frameworks */,
+				37D1113129A7A7B000FECB6B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				37D1113529A7A7B000FECB6B /* PBXTargetDependency */,
+			);
+			name = CantoneseIMETests;
+			productName = CantoneseIMETests;
+			productReference = 37D1113329A7A7B000FECB6B /* CantoneseIMETests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		37D1113C29A7A7B000FECB6B /* CantoneseIMEUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37D1114D29A7A7B000FECB6B /* Build configuration list for PBXNativeTarget "CantoneseIMEUITests" */;
+			buildPhases = (
+				37D1113929A7A7B000FECB6B /* Sources */,
+				37D1113A29A7A7B000FECB6B /* Frameworks */,
+				37D1113B29A7A7B000FECB6B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				37D1113F29A7A7B000FECB6B /* PBXTargetDependency */,
+			);
+			name = CantoneseIMEUITests;
+			productName = CantoneseIMEUITests;
+			productReference = 37D1113D29A7A7B000FECB6B /* CantoneseIMEUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		37D1111A29A7A7AF00FECB6B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					37D1112129A7A7AF00FECB6B = {
+						CreatedOnToolsVersion = 14.3;
+					};
+					37D1113229A7A7B000FECB6B = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = 37D1112129A7A7AF00FECB6B;
+					};
+					37D1113C29A7A7B000FECB6B = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = 37D1112129A7A7AF00FECB6B;
+					};
+				};
+			};
+			buildConfigurationList = 37D1111D29A7A7AF00FECB6B /* Build configuration list for PBXProject "CantoneseIME" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hant",
+				"zh-Hans",
+				"zh-HK",
+				yue,
+				"zh-Hant-HK",
+			);
+			mainGroup = 37D1111929A7A7AF00FECB6B;
+			productRefGroup = 37D1112329A7A7AF00FECB6B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				37D1112129A7A7AF00FECB6B /* CantoneseIME */,
+				37D1113229A7A7B000FECB6B /* CantoneseIMETests */,
+				37D1113C29A7A7B000FECB6B /* CantoneseIMEUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		37D1112029A7A7AF00FECB6B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37D1117F29A7A98100FECB6B /* notationsample.txt in Resources */,
+				37B5D52D29A7ADF9003E2ED8 /* InfoPlist.strings in Resources */,
+				37D1112D29A7A7B000FECB6B /* Preview Assets.xcassets in Resources */,
+				37B5D52E29A7ADF9003E2ED8 /* Localizable.strings in Resources */,
+				37B5D53029A7B1C9003E2ED8 /* cantoneseime.pdf in Resources */,
+				37B5D51D29A7ACAA003E2ED8 /* name.xcconfig in Resources */,
+				37D1112A29A7A7B000FECB6B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37D1113129A7A7B000FECB6B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37D1113B29A7A7B000FECB6B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		37D1111E29A7A7AF00FECB6B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37D1118829A7A98100FECB6B /* ViewExtensions.swift in Sources */,
+				37D1118029A7A98100FECB6B /* CantoneseIMEInputController.swift in Sources */,
+				37D1118629A7A98100FECB6B /* CharacterExtensions.swift in Sources */,
+				37D1117929A7A98100FECB6B /* Representative.swift in Sources */,
+				37D1117429A7A98100FECB6B /* Language.swift in Sources */,
+				37D1118329A7A98100FECB6B /* SerialNumberLabel.swift in Sources */,
+				37D1118A29A7A98100FECB6B /* ArrayExtensions.swift in Sources */,
+				37D1117A29A7A98100FECB6B /* Suggestions.swift in Sources */,
+				37D1118429A7A98100FECB6B /* CandidateBoard.swift in Sources */,
+				37D1117329A7A98100FECB6B /* DisplayObject.swift in Sources */,
+				37D1117E29A7A98100FECB6B /* EventHandler.swift in Sources */,
+				37D1117C29A7A98100FECB6B /* Menu.swift in Sources */,
+				37D1118929A7A98100FECB6B /* StringExtensions.swift in Sources */,
+				37D1117B29A7A98100FECB6B /* CandidateWindow.swift in Sources */,
+				37D1118729A7A98100FECB6B /* IMKTextInputExtensions.swift in Sources */,
+				37D1117629A7A98100FECB6B /* Direction.swift in Sources */,
+				37D1117D29A7A98100FECB6B /* WindowPattern.swift in Sources */,
+				37D1117829A7A98100FECB6B /* KeyCode.swift in Sources */,
+				37D1118129A7A98100FECB6B /* VisualEffect.swift in Sources */,
+				37D1117729A7A98100FECB6B /* PunctuationKey.swift in Sources */,
+				37D1117529A7A98100FECB6B /* Candidate.swift in Sources */,
+				37D1118529A7A98100FECB6B /* CandidateLabel.swift in Sources */,
+				37D1118C29A7A99C00FECB6B /* CantoneseIMEApp.swift in Sources */,
+				37D1118229A7A98100FECB6B /* CantoneseLabel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37D1112F29A7A7B000FECB6B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37D1113829A7A7B000FECB6B /* CantoneseIMETests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37D1113929A7A7B000FECB6B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37D1114229A7A7B000FECB6B /* CantoneseIMEUITests.swift in Sources */,
+				37D1114429A7A7B000FECB6B /* CantoneseIMEUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		37D1113529A7A7B000FECB6B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 37D1112129A7A7AF00FECB6B /* CantoneseIME */;
+			targetProxy = 37D1113429A7A7B000FECB6B /* PBXContainerItemProxy */;
+		};
+		37D1113F29A7A7B000FECB6B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 37D1112129A7A7AF00FECB6B /* CantoneseIME */;
+			targetProxy = 37D1113E29A7A7B000FECB6B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		37B5D51F29A7ADF9003E2ED8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37B5D52029A7ADF9003E2ED8 /* en */,
+				37B5D52329A7ADF9003E2ED8 /* zh-Hant */,
+				37B5D52529A7ADF9003E2ED8 /* zh-Hans */,
+				37B5D52729A7ADF9003E2ED8 /* zh-HK */,
+				37B5D52929A7ADF9003E2ED8 /* yue */,
+				37B5D52B29A7ADF9003E2ED8 /* zh-Hant-HK */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		37B5D52129A7ADF9003E2ED8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37B5D52229A7ADF9003E2ED8 /* en */,
+				37B5D52429A7ADF9003E2ED8 /* zh-Hant */,
+				37B5D52629A7ADF9003E2ED8 /* zh-Hans */,
+				37B5D52829A7ADF9003E2ED8 /* zh-HK */,
+				37B5D52A29A7ADF9003E2ED8 /* yue */,
+				37B5D52C29A7ADF9003E2ED8 /* zh-Hant-HK */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		37D1114529A7A7B000FECB6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		37D1114629A7A7B000FECB6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		37D1114829A7A7B000FECB6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CantoneseIME/CantoneseIME.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"CantoneseIME/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CantoneseIME/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSBackgroundOnly = NO;
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Bing ZHEUNG";
+				INFOPLIST_KEY_NSPrincipalClass = "$(PRODUCT_MODULE_NAME).PrincipalApplication";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = hk.eduhk.inputmethod.Jyutping;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		37D1114929A7A7B000FECB6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37B5D51C29A7ACAA003E2ED8 /* name.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CantoneseIME/CantoneseIME.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"CantoneseIME/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CantoneseIME/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSBackgroundOnly = NO;
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Bing ZHEUNG";
+				INFOPLIST_KEY_NSPrincipalClass = "$(PRODUCT_MODULE_NAME).PrincipalApplication";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = hk.eduhk.inputmethod.Jyutping;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		37D1114B29A7A7B000FECB6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = hk.eduhk.inputmethod.CantoneseIMETests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CantoneseIME.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CantoneseIME";
+			};
+			name = Debug;
+		};
+		37D1114C29A7A7B000FECB6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = hk.eduhk.inputmethod.CantoneseIMETests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CantoneseIME.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CantoneseIME";
+			};
+			name = Release;
+		};
+		37D1114E29A7A7B000FECB6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = hk.eduhk.inputmethod.CantoneseIMEUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = CantoneseIME;
+			};
+			name = Debug;
+		};
+		37D1114F29A7A7B000FECB6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = hk.eduhk.inputmethod.CantoneseIMEUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = CantoneseIME;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		37D1111D29A7A7AF00FECB6B /* Build configuration list for PBXProject "CantoneseIME" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37D1114529A7A7B000FECB6B /* Debug */,
+				37D1114629A7A7B000FECB6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37D1114729A7A7B000FECB6B /* Build configuration list for PBXNativeTarget "CantoneseIME" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37D1114829A7A7B000FECB6B /* Debug */,
+				37D1114929A7A7B000FECB6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37D1114A29A7A7B000FECB6B /* Build configuration list for PBXNativeTarget "CantoneseIMETests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37D1114B29A7A7B000FECB6B /* Debug */,
+				37D1114C29A7A7B000FECB6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37D1114D29A7A7B000FECB6B /* Build configuration list for PBXNativeTarget "CantoneseIMEUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37D1114E29A7A7B000FECB6B /* Debug */,
+				37D1114F29A7A7B000FECB6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		37D1115229A7A92500FECB6B /* CoreIME */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreIME;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 37D1111A29A7A7AF00FECB6B /* Project object */;
+}

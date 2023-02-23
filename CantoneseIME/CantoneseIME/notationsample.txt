@@ -1,0 +1,121 @@
+香港	hoeng1 gong2	1	0	0	971633		Hong Kong		n		place								
+表示	biu2 si6	1	0	0	680145		to express	to express	v										
+美國	mei5 gwok3	1	0	0	520957		U.S.A	The United States of America	n		place								
+昨日	zok6 jat6	1	0	0	515914		yesterday		n	for		昨天							
+昨日	zok3 jat6	2	0	0	515914		yesterday		n	for		昨天							
+不過	bat1 gwo3	1	0	0	511389		but		conj										
+記者	gei3 ze2	1	0	0	496025		reporter; journalist		n										
+政府	zing3 fu2	1	0	0	489974		government		n										
+今年	gam1 nin4	1	0	0	450160		this year		n										
+中國	zung1 gwok3	1	0	0	423530		China	People's Republic of China	n		place								
+內地	noi6 dei6	1	0	0	416454		mainland	often refers to mainland China	n		place								
+一個	jat1 go3	1	0	0	413328		one	"one of something, a/an"	oth										
+自己	zi6 gei2	1	0	0	400014		oneself		n										
+公司	gung1 si1	1	0	0	387431		company		n										
+可以	ho2 ji5	1	0	0	378380		can		mv										
+沒有	mut6 jau5	1	0	0	366983		no; there isn't		v	wri			冇						
+包括	baau1 kut3	1	0	0	361054		to include		v										
+因為	jan1 wai6	1	0	0	356757		because		conj										
+去年	heoi3 nin4	1	0	0	349922		last year		n				舊年						
+市場	si5 coeng4	1	0	0	340313		market		n										
+雖然	seoi1 jin4	1	0	0	337921		although		v										
+認為	jing6 wai4	1	0	0	336551		to think		v										
+他們	taa1 mun4	1	0	0	335756		they		n	wri			佢哋						
+警方	ging2 fong1	1	0	0	335059		police force		n										
+問題	man6 tai4	1	0	0	287390		problem		n										
+希望	hei1 mong6	1	0	0	286714		hope		v										
+蘋果	ping4 gwo2	1	0	0	279335		apple		n										
+的	dik1	1	0	0	8033973		"of, 's"	linker	oth	wri			嘅		Note that the order of this word is different from English.				
+及	kap6	1	0	0	2798804		and	for noun phrases only	conj	for			同						
+在	zoi6	1	0	0	2256745		"at, in, on"		prep	wri			喺						
+和	wo6	2	0	0	1462963		harmonic		adj		rare				Only used in 和聲 wo6 sing1				
+和	wo4	1	0	0	1462963		and; with	for noun phrases;	conj;conj	wri;wri	;	;	同;同	;					
+是	si6	1	0	0	1362597		to be; yes	copula;	oth;oth	wri;wri	;	;	係;係	;					
+但	daan6	1	0	0	1361134		but		conj										
+與	jyu5	1	0	0	1326221		and		conj	"wri,for"			同						
+有	jau5	1	0	0	1296655		to have; there is	;	v;v		;	;	;	;					
+後	hau6	1	0	0	1246312		after; behind	;	"oth;oth,n"		;	;	;	;					
+以	ji5	1	0	0	1201303		using	usually followed by another verb	v										
+年	nin4	1	0	0	1159236		year		n										
+時	si4	1	0	0	1074924		time; hour	;	n;n			;	;	;					
+至	zi3	1	0	0	1064078		"to, until"		prep	for		到	到						
+為	wai4	1	0	0	998159		to be		v										
+為	wai6	2	0	0	998159		for		prep										
+他	taa1	1	0	0	993049		"he, him"		n	wri			佢						
+指	zi2	1	0	0	968781		to point		v										
+嘅	ge3	1	0	0	908124		"of, 's"	linker	oth	col		的							
+元	jyun4	1	0	0	870863		dollar		n	for		塊	蚊						
+月	jyut6	1	0	0	863821		month	month	n										
+周	zau1	1	0	0	839123		Chow		n		sur								
+等	dang2	1	0	0	773875		to wait; etc	;	v;oth	;	;	;	;	;					
+被	bei6	1	0	0	757447		to indicate passive voice		oth	wri			俾						
+被	pei5	2	0	0	757447		blanket		n										
+了	liu5	1	0	0	755901		already		oth	wri			"咗, 嘞"						
+而	ji4	1	0	0	751070		and	for verb phrases only	conj										
+到	dou3	1	0	0	713183		to go to		v										
+到	dou2	2	0	0	713183		can	be able to do smth	oth										
+或	waak6	1	0	0	689428		or		conj										
+已	ji5	1	0	0	688704		already		oth										
+由	jau4	1	0	0	683846		"from, by"		prep	for		從							
+對	deoi3	1	0	0	680405		correct; pair; to	;;with regard to	oth;mw;prep	wri;;	;;	;;	啱;;	;;					
+日	jat6	1	0	0	679945		"date, day"	as in day of the month	n	"col,for"		天							
+於	jyu1	1	0	0	666226		at		prep	for		在	喺						
+人	jan4	1	0	0	649756		person		n										
+亦	jik6	1	0	0	647833		as well as		conj	for		"也,都"							
+將	zoeng3	2	0	0	642931		general	army officer	n		morph								
+將	zoeng1	1	0	0	642931		"almost, will; to take"	;	adv;mv	;for	;	;把	;	;					
+她	taa1	1	0	0	641741		"she, her"		n	wri			佢						
+中	zung3	2	0	0	641683		to hit	"to be infected by a disease, to win a lottery"	v										
+中	zung1	1	0	0	641683		"middle; in, during"	;	n;oth	;	;	;	;	;					
+會	wui2	1	1	0	626596		association	a club/organization	n										
+會	wui5	1	0	0	626596		will	would	mv										
+會	wui6	1	0	0	626596		to meet		v		morph								
+約	joek3	1	0	0	615102		approximately		adv										
+説	syut3	1	0	0	608104		to speak		v	wri			講						
+説	seoi3	2	0	0	608104		to persuade		v										
+説	jyut6	3	0	0	608104		happy		n	lit	rare								
+前	cin4	1	0	0	548216		front; before	;	n;prep	;	;	;	;	;					
+令	ling6	1	0	0	509334		to cause		mv			讓							
+都	dou1	1	0	0	505902		also; all	;	oth;adj	col;	;	;	;	;					
+上	soeng5	1	0	0	499905		to go up; to go to	;	v;v	;wri	;	;	;返	;					
+上	soeng6	2	0	0	499905		up		n										
+係	hai6	1	0	0	498859		to be; yes	copula;	oth;oth	"col,for;col,for"	;	是;是	;	;					
+向	hoeng3	1	0	0	495660		towards		prep										
+要	jiu3	1	0	0	491806		to need		"v,mv"										
+又	jau6	1	0	0	488898		again		adv										
+更	gang1	1	0	-1	482538		to change		v										
+更	gaang1	1	0	1	482538		session		n										
+更	gang3	1	0	0	482538		"even, more"	followed by an adj. (intensifies the adjective)	adv	wri									
+昨	zok3	1	0	0	480535		yesterday		n		morph								
+歲	seoi3	1	0	0	477782		year		n										
+個	go3	1	0	0	460450		"a, an"	"other meanings: each, individual, per"	mw										
+佢	keoi5	1	0	0	449414		"he, him, she, her"		n			"他,她"							
+就	zau6	1	0	0	430375		then		adv										
+因	jan1	1	0	0	425049		because		conj										
+曾	cang4	1	0	0	421649		once	"already, before"	adv										
+曾	zang1	1	0	0	421649		Tsang		n		sur								
+可	ho2	1	0	0	413244		can	be able to	mv										
+下	haa5	1	0	0	408231		try		oth	col		一下			吓 haa5				
+下	haa6	1	0	0	408231		down; to go down	;	n;v	;	;	;	;落	;	Used In Example like 落下 lok6 haa6				
+陳	can4	1	0	0	391102		Chan		n		sur								
+價	gaa3	1	0	0	387411		price		n										
+萬	maan6	1	0	0	381135		ten thousand; Man	;	n;n		;sur	;	;	;					
+則	zak1	1	0	0	374106		then		adv	for		就							
+也	jaa5	1	0	0	368746		also		oth	wri			都						
+高	gou1	1	0	0	365032		high	tall	adj										
+股	gu2	1	0	0	363352		share	of a stock (in the stock market)	n										
+升	sing1	1	0	0	362701		increase		v										
+其	kei4	1	0	0	361219		that; its	;	n;oth	lit;lit	rare;rare	那;他的	嗰;佢	;					
+大	daai6	1	0	0	361102		big		adj										
+稱	cing1	1	0	0	358723		to claim; to address		v;v	;	;	;	;	;					
+稱	cing3	2	0	0	358723		to satisfiy		morph										
+達	daat6	1	0	0	354834		to reach	to reach; to achieve	v										
+李	lei5	1	0	0	348631		"Lee, Li"		n		sur								
+同	tung4	1	0	0	338017		same; and; with	; for noun phrases;	;;	;col;col	;;	;和;和	;;	;;					
+喺	hai2	1	0	0	337590		"at, in, on"		prep	col		在							
+名	ming4	1	0	-1	330812		name		n		morph								
+名	meng2	2	1	1	330812		name		n	col		名字							
+做	zou6	1	0	0	328224		to do		v										
+去	heoi3	1	0	0	322657		to go		v										
+用	jung6	1	0	0	321762		to use		v										
+港	gong2	1	0	0	316238		port; Hong Kong	;	n;n	;	;place	;	;	;					

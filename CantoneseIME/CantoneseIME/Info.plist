@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ComponentInputModeDict</key>
+	<dict>
+		<key>tsInputModeListKey</key>
+		<dict>
+			<key>hk.eduhk.inputmethod.Jyutping.IME</key>
+			<dict>
+				<key>TISIconLabels</key>
+				<dict>
+					<key>Primary</key>
+					<string>Jyutping</string>
+				</dict>
+				<key>TISInputSourceID</key>
+				<string>hk.eduhk.inputmethod.Jyutping.IME</string>
+				<key>TISIntendedLanguage</key>
+				<string>yue-Hant</string>
+				<key>tsInputModeAlternateMenuIconFileKey</key>
+				<string>cantoneseime.pdf</string>
+				<key>tsInputModeDefaultStateKey</key>
+				<true/>
+				<key>tsInputModeIsVisibleKey</key>
+				<true/>
+				<key>tsInputModeKeyEquivalentModifiersKey</key>
+				<integer>4608</integer>
+				<key>tsInputModeMenuIconFileKey</key>
+				<string>cantoneseime.pdf</string>
+				<key>tsInputModePaletteIconFileKey</key>
+				<string>cantoneseime.pdf</string>
+				<key>tsInputModePrimaryInScriptKey</key>
+				<true/>
+				<key>tsInputModeScriptKey</key>
+				<string>smUnicodeScript</string>
+			</dict>
+		</dict>
+		<key>tsVisibleInputModeOrderedArrayKey</key>
+		<array>
+			<string>hk.eduhk.inputmethod.Jyutping.IME</string>
+		</array>
+	</dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>InputMethodConnectionName</key>
+	<string>hk_eduhk_inputmethod_Jyutping_1_Connection</string>
+	<key>InputMethodServerControllerClass</key>
+	<string>$(PRODUCT_MODULE_NAME).CantoneseIMEInputController</string>
+	<key>InputMethodServerDelegateClass</key>
+	<string>$(PRODUCT_MODULE_NAME).CantoneseIMEInputController</string>
+	<key>LSHasLocalizedDisplayName</key>
+	<true/>
+	<key>TICapsLockLanguageSwitchCapable</key>
+	<true/>
+	<key>TISIntendedLanguage</key>
+	<string>yue-Hant</string>
+	<key>tsInputMethodCharacterRepertoireKey</key>
+	<array>
+		<string>Hant</string>
+		<string>Hans</string>
+	</array>
+	<key>tsInputMethodIconFileKey</key>
+	<string>cantoneseime.pdf</string>
+</dict>
+</plist>

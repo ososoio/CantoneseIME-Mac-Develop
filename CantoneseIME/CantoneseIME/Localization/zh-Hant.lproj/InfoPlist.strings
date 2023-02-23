@@ -1,0 +1,4 @@
+"hk.eduhk.inputmethod.Jyutping" = "CantoneseIME";
+"hk.eduhk.inputmethod.Jyutping.IME" = "CantoneseIME";
+CFBundleName = "CantoneseIME";
+CFBundleDisplayName = "CantoneseIME";
