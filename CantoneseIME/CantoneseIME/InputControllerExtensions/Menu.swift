@@ -8,10 +8,6 @@ extension CantoneseIMEInputController {
                 let menu = NSMenu(title: menuTittle)
 
                 for language in AppSettings.commentLanguages {
-                        let name: String = language.rawValue
-                        let localizedName: String = NSLocalizedString(name, comment: "")
-                        let isEnabled: Bool = language.isEnabledCommentLanguage
-                        let tittle: String = isEnabled ? ("✓ " + localizedName) : localizedName
                         let selector: Selector? = {
                                 switch language {
                                 case .Cantonese:
@@ -28,15 +24,21 @@ extension CantoneseIMEInputController {
                                         return #selector(toggleUrdu)
                                 }
                         }()
-                        let item: NSMenuItem = NSMenuItem(title: tittle, action: selector, keyEquivalent: "")
+                        let name: String = language.rawValue
+                        let localizedName: String = NSLocalizedString(name, comment: "")
+                        let item: NSMenuItem = NSMenuItem(title: localizedName, action: selector, keyEquivalent: "")
+                        item.state = language.isEnabledCommentLanguage ? .on : .off
                         menu.addItem(item)
                 }
 
                 menu.addItem(.separator())
 
+                // TODO: Implement Help
+                /*
                 let helpTitle: String = NSLocalizedString("Help", comment: "")
                 let help = NSMenuItem(title: helpTitle, action: #selector(openHelp), keyEquivalent: "")
                 menu.addItem(help)
+                */
 
                 let terminateTittle: String = NSLocalizedString("Quit", comment: "")
                 let terminate = NSMenuItem(title: terminateTittle, action: #selector(terminateApp), keyEquivalent: "")
