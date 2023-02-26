@@ -39,7 +39,7 @@ final class CantoneseIMEInputController: IMKInputController {
         }
 
         override func activateServer(_ sender: Any!) {
-                Lychee.prepare()
+                Engine.prepare()
                 currentClient = sender as? IMKTextInput
                 if !bufferText.isEmpty {
                         bufferText = .empty
@@ -150,7 +150,7 @@ final class CantoneseIMEInputController: IMKInputController {
                 willSet {
                         let isStarting: Bool = processingText.isEmpty && !newValue.isEmpty
                         guard isStarting else { return }
-                        Lychee.prepare()
+                        Engine.prepare()
                 }
                 didSet {
                         switch processingText.first {

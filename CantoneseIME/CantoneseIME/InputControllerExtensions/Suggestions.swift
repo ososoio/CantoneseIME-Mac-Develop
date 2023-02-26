@@ -23,13 +23,13 @@ extension CantoneseIMEInputController {
         func suggest() {
                 let fetched: [CoreIME.Candidate] = {
                         let convertedSegmentation: Segmentation = segmentation.converted()
-                        let normal = Lychee.suggest(for: processingText, segmentation: convertedSegmentation)
+                        let normal = Engine.suggest(for: processingText, segmentation: convertedSegmentation)
                         let droppedLast = processingText.dropLast()
                         let shouldDropSeparator: Bool = normal.isEmpty && processingText.hasSuffix("'") && !droppedLast.contains("'")
                         guard shouldDropSeparator else { return normal }
                         let droppedSeparator: String = String(droppedLast)
                         let newSegmentation: Segmentation = Segmentor.segment(droppedSeparator).filter({ $0.joined() == droppedSeparator || $0.count == 1 })
-                        return Lychee.suggest(for: droppedSeparator, segmentation: newSegmentation)
+                        return Engine.suggest(for: droppedSeparator, segmentation: newSegmentation)
                 }()
                 let candidates = transformed(fetched)
                 let sortedCandidates = candidates.uniqued().sorted(by: { !$0.comments.isEmpty && $1.comments.isEmpty && ($0.input >= $1.input) })
@@ -42,7 +42,7 @@ extension CantoneseIMEInputController {
                         empty()
                         return
                 }
-                let lookup = Lychee.pinyinLookup(for: text)
+                let lookup = Engine.pinyinLookup(for: text)
                 let candidates = transformed(lookup)
                 push(candidates.uniqued())
         }
@@ -52,7 +52,7 @@ extension CantoneseIMEInputController {
                 let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
                 if isValidSequence {
                         markedText = String(converted)
-                        let lookup = Lychee.cangjieLookup(for: text)
+                        let lookup = Engine.cangjieLookup(for: text)
                         let candidates = transformed(lookup)
                         push(candidates.uniqued())
                 } else {
@@ -67,7 +67,7 @@ extension CantoneseIMEInputController {
                 let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
                 if isValidSequence {
                         markedText = String(converted)
-                        let lookup = Lychee.strokeLookup(for: transformedText)
+                        let lookup = Engine.strokeLookup(for: transformedText)
                         let candidates = transformed(lookup)
                         push(candidates.uniqued())
                 } else {
@@ -81,7 +81,7 @@ extension CantoneseIMEInputController {
                         empty()
                         return
                 }
-                let lookup = Lychee.leungFanLookup(for: text)
+                let lookup = Engine.leungFanLookup(for: text)
                 let candidates = transformed(lookup)
                 push(candidates.uniqued())
         }

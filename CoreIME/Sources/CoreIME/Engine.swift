@@ -1,254 +1,151 @@
 import Foundation
 import SQLite3
 
-private struct RowCandidate {
-        let candidate: Candidate
-        let row: Int
-        let isExactlyMatch: Bool
-}
+public struct Engine {
 
-private extension Array where Element == RowCandidate {
-        func sorted() -> [RowCandidate] {
-                return self.sorted(by: { (lhs, rhs) -> Bool in
-                        let shouldCompare: Bool = !lhs.isExactlyMatch && !rhs.isExactlyMatch
-                        guard shouldCompare else { return lhs.isExactlyMatch && !rhs.isExactlyMatch }
-                        let lhsTextCount: Int = lhs.candidate.text.count
-                        let rhsTextCount: Int = rhs.candidate.text.count
-                        guard lhsTextCount == rhsTextCount else { return lhsTextCount > rhsTextCount }
-                        return (rhs.row - lhs.row) > 50000
-                })
-        }
-}
+        /// SQLite3 database
+        private(set) static var database: OpaquePointer? = nil
 
-extension Lychee {
-
-        public static func suggest(for text: String, segmentation: Segmentation) -> [Candidate] {
-                switch text.count {
-                case 0:
-                        return []
-                case 1:
-                        return shortcut(for: text)
-                default:
-                        return fetch(text: text, segmentation: segmentation)
+        /// Connect SQLite3 database
+        private static func connect() {
+                guard let path: String = Bundle.module.path(forResource: "lexicon", ofType: "sqlite3") else { return }
+                var db: OpaquePointer?
+                if sqlite3_open_v2(path, &db, SQLITE_OPEN_READONLY, nil) == SQLITE_OK {
+                        database = db
                 }
         }
 
-        private static func fetch(text: String, segmentation: Segmentation) -> [CoreCandidate] {
-                let textWithoutSeparators: String = text.filter({ !($0.isSeparator) })
-                guard let bestScheme: SyllableScheme = segmentation.first, !bestScheme.isEmpty else {
-                        return processCharacters(textWithoutSeparators)
-                }
-                let convertedText = textWithoutSeparators.replacingOccurrences(of: "(?<!c|s|j|z)yu(?!k|m|ng)", with: "jyu", options: .regularExpression)
-                if bestScheme.length == convertedText.count {
-                        return process(text: convertedText, origin: text, sequences: segmentation)
-                } else {
-                        return processPartial(text: textWithoutSeparators, origin: text, sequences: segmentation)
+        /// Close SQLite3 database
+        public static func close() {
+                guard database != nil else { return }
+                if sqlite3_close_v2(database) == SQLITE_OK {
+                        database = nil
                 }
         }
 
-        private static func processCharacters(_ text: String) -> [CoreCandidate] {
-                let textCount: Int = text.count
-                let rounds = (0..<textCount).map { number -> [CoreCandidate] in
-                        let leading: String = String(text.dropLast(number))
-                        let prefixes: [CoreCandidate] = prefix(match: leading)
-                                .sorted(by: { (lhs, rhs) -> Bool in
-                                        guard number != 0 else { return false }
-                                        return lhs.romanization.removedSpacesTones().hasPrefix(text) && !(rhs.romanization.removedSpacesTones().hasPrefix(text))
-                                })
-                                .map({ item -> CoreCandidate in
-                                        guard number != 0 else { return item }
-                                        guard item.romanization.removedSpacesTones().hasPrefix(text) else { return item }
-                                        return CoreCandidate(text: item.text, romanization: item.romanization, input: text)
-                                })
-                        let sliced = (number == 0) ? prefixes : prefixes[..<min(8, prefixes.count)].compactMap({ $0 })
-                        return match(for: leading) + sliced + shortcut(for: leading)
-                }
-                return rounds.flatMap({ $0 })
+        /// Reconnect database if it's not working
+        public static func prepare() {
+                guard !isWorking else { return }
+                close()
+                connect()
         }
-        private static func process(text: String, origin: String, sequences: [[String]]) -> [CoreCandidate] {
-                let hasSeparators: Bool = text.count != origin.count
-                let candidates = match(schemes: sequences, hasSeparators: hasSeparators, fullTextCount: origin.count)
-                guard !hasSeparators else { return candidates }
-                let fullProcessed: [CoreCandidate] = match(for: text) + shortcut(for: text) + prefix(match: text)
-                let backup: [CoreCandidate] = processCharacters(text)
-                let fallback: [CoreCandidate] = fullProcessed + candidates + backup
-                guard let firstCandidate = candidates.first else { return fallback }
-                let firstInputCount: Int = firstCandidate.input.count
-                guard firstInputCount != text.count else { return fallback }
-                let tailText: String = String(text.dropFirst(firstInputCount))
-                let tailSegmentation: Segmentation = Segmentor.engineSegment(tailText)
-                let hasSchemes: Bool = !(tailSegmentation.first?.isEmpty ?? true)
-                guard hasSchemes else { return fallback }
-                let tailCandidates = match(schemes: tailSegmentation, hasSeparators: false)
-                guard let firstTailCandidate = tailCandidates.first else { return fallback }
-                let qualified = candidates.enumerated().filter({ $0.offset < 3 && $0.element.input.count == firstInputCount })
-                let combines = qualified.map({ $0.element + firstTailCandidate })
-                return fullProcessed + combines + candidates + backup
-        }
-        private static func processPartial(text: String, origin: String, sequences: [[String]]) -> [CoreCandidate] {
-                let hasSeparators: Bool = text.count != origin.count
-                let candidates: [CoreCandidate] = match(schemes: sequences, hasSeparators: hasSeparators, fullTextCount: origin.count)
-                guard !hasSeparators else { return candidates }
-                let fullProcessed: [CoreCandidate] = match(for: text) + shortcut(for: text) + prefix(match: text)
-                let backup: [CoreCandidate] = processCharacters(text)
-                let fallback: [CoreCandidate] = fullProcessed + candidates + backup
-                guard let firstCandidate: CoreCandidate = candidates.first else { return fallback }
-                let firstInputCount: Int = firstCandidate.input.count
-                guard firstInputCount != text.count else { return fallback }
-                let tailText: String = String(text.dropFirst(firstInputCount))
-                if let tailOne: CoreCandidate = prefix(match: tailText, count: 1).first {
-                        let qualified = candidates.enumerated().filter({ $0.offset < 3 && $0.element.input.count == firstInputCount })
-                        let combines = qualified.map({ $0.element + tailOne })
-                        return fullProcessed + combines + candidates + backup
+
+        private static var isWorking: Bool {
+                guard database != nil else { return false }
+                let text: String = "ngo"
+                let code = text.hash
+                let queryString = "SELECT word FROM imetable WHERE ping = \(code) LIMIT 1;"
+                var queryStatement: OpaquePointer? = nil
+                defer {
+                        sqlite3_finalize(queryStatement)
                 }
-                let tailSyllables: [String] = Segmentor.scheme(of: tailText)
-                guard !(tailSyllables.isEmpty) else { return fallback }
-                var concatenated: [CoreCandidate] = []
-                let hasTailCandidate: Bool = {
-                        let syllablesText = tailSyllables.joined()
-                        let difference: Int = tailText.count - syllablesText.count
-                        guard difference > 1 else { return false }
-                        let syllablesPlusOne = tailText.dropLast(difference - 1)
-                        guard let one = prefix(match: String(syllablesPlusOne), count: 1).first else { return false }
-                        let qualified = candidates.enumerated().filter({ $0.offset < 3 && $0.element.input.count == firstInputCount })
-                        let combines = qualified.map({ $0.element + one })
-                        concatenated = combines
-                        return true
-                }()
-                if !hasTailCandidate {
-                        for (index, _) in tailSyllables.enumerated().reversed() {
-                                let someSyllables: String = tailSyllables[0...index].joined()
-                                if let one: CoreCandidate = matchWithLimitCount(for: someSyllables, count: 1).first {
-                                        let qualified = candidates.enumerated().filter({ $0.offset < 3 && $0.element.input.count == firstInputCount })
-                                        let combines = qualified.map({ $0.element + one })
-                                        concatenated = combines
-                                        break
-                                }
-                        }
-                }
-                return fullProcessed + concatenated + candidates + backup
-        }
-        private static func match(schemes: [[String]], hasSeparators: Bool, fullTextCount: Int = -1) -> [CoreCandidate] {
-                let matches = schemes.map { scheme -> [RowCandidate] in
-                        let joinedText = scheme.joined()
-                        let isExactlyMatch: Bool = joinedText.count == fullTextCount
-                        return matchWithRowID(for: joinedText, isExactlyMatch: isExactlyMatch)
-                }
-                let candidates: [CoreCandidate] = matches.flatMap({ $0 }).sorted().map({ $0.candidate })
-                guard hasSeparators else { return candidates }
-                let firstSyllable: String = schemes.first?.first ?? "X"
-                let filtered: [CoreCandidate] = candidates.filter { candidate in
-                        let firstRomanization: String = candidate.romanization.components(separatedBy: String.space).first ?? "Y"
-                        return firstSyllable == firstRomanization.removedTones()
-                }
-                return filtered
+                guard sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK else { return false }
+                return sqlite3_step(queryStatement) == SQLITE_ROW
         }
 }
 
 
-private extension Lychee {
+extension Engine {
 
-        // CREATE TABLE imetable(word TEXT NOT NULL, romanization TEXT NOT NULL, ping INTEGER NOT NULL, shortcut INTEGER NOT NULL, prefix INTEGER NOT NULL);
-
-        static func shortcut(for text: String, count: Int = 100) -> [CoreCandidate] {
-                guard !text.isEmpty else { return [] }
-                let textHash: Int = text.replacingOccurrences(of: "y", with: "j").hash
-                var candidates: [CoreCandidate] = []
-                let queryString = "SELECT word, romanization FROM imetable WHERE shortcut = \(textHash) LIMIT \(count);"
-                var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
-                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let candidate: CoreCandidate = CoreCandidate(text: word, romanization: romanization, input: text)
-                                candidates.append(candidate)
-                        }
-                }
-                sqlite3_finalize(queryStatement)
-                return candidates
+        public static func searchEmojis(for text: String) -> [Candidate] {
+                let regularMatch = matchEmojis(for: text)
+                guard regularMatch.isEmpty else { return regularMatch }
+                let convertedText: String = text.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
+                        .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
+                        .replacingOccurrences(of: "eung$", with: "oeng", options: .regularExpression)
+                        .replacingOccurrences(of: "(u|o)m$", with: "am", options: .regularExpression)
+                        .replacingOccurrences(of: "^(ng|gw|kw|[b-z])?a$", with: "$1aa", options: .regularExpression)
+                        .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
+                        .replacingOccurrences(of: "y", with: "j", options: .anchored)
+                return matchEmojis(for: convertedText)
         }
 
-        static func match(for text: String) -> [CoreCandidate] {
-                guard !text.isEmpty else { return [] }
-                var candidates: [CoreCandidate] = []
-                let tones: String = text.tones
-                let hasTones: Bool = !tones.isEmpty
-                let ping: String = hasTones ? text.removedTones() : text
-                let queryString = "SELECT word, romanization FROM imetable WHERE ping = \(ping.hash);"
+        private static func matchEmojis(for text: String) -> [Candidate] {
+                var candidates: [Candidate] = []
+                let queryString = "SELECT emoji, cantonese, romanization FROM emojitable WHERE ping = \(text.hash);"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
-                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                if !hasTones || tones == romanization.tones || (tones.count == 1 && text.last == romanization.last) {
-                                        let candidate: CoreCandidate = CoreCandidate(text: word, romanization: romanization, input: text)
-                                        candidates.append(candidate)
-                                }
-                        }
+                defer {
+                        sqlite3_finalize(queryStatement)
                 }
-                sqlite3_finalize(queryStatement)
-                return candidates
-        }
-        static func matchWithLimitCount(for text: String, count: Int) -> [CoreCandidate] {
-                guard !text.isEmpty else { return [] }
-                var candidates: [CoreCandidate] = []
-                let tones: String = text.tones
-                let hasTones: Bool = !tones.isEmpty
-                let ping: String = hasTones ? text.removedTones() : text
-                let queryString = "SELECT word, romanization FROM imetable WHERE ping = \(ping.hash) LIMIT \(count);"
-                var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
-                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                if !hasTones || tones == romanization.tones || (tones.count == 1 && text.last == romanization.last) {
-                                        let candidate: CoreCandidate = CoreCandidate(text: word, romanization: romanization, input: text)
-                                        candidates.append(candidate)
-                                }
-                        }
-                }
-                sqlite3_finalize(queryStatement)
-                return candidates
-        }
-        static func matchWithRowID(for text: String, isExactlyMatch: Bool) -> [RowCandidate] {
-                guard !text.isEmpty else { return [] }
-                var rowCandidates: [RowCandidate] = []
-                let tones: String = text.tones
-                let hasTones: Bool = !tones.isEmpty
-                let ping: String = hasTones ? text.removedTones() : text
-                let queryString = "SELECT rowid, word, romanization FROM imetable WHERE ping = \(ping.hash);"
-                var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let rowid: Int = Int(sqlite3_column_int64(queryStatement, 0))
-                                let word: String = String(cString: sqlite3_column_text(queryStatement, 1))
+                                let emojiCodeText: String = String(cString: sqlite3_column_text(queryStatement, 0))
+                                let cantonese: String = String(cString: sqlite3_column_text(queryStatement, 1))
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 2))
-                                if !hasTones || tones == romanization.tones || (tones.count == 1 && text.last == romanization.last) {
-                                        let candidate: CoreCandidate = CoreCandidate(text: word, romanization: romanization, input: text)
-                                        let rowCandidate: RowCandidate = RowCandidate(candidate: candidate, row: rowid, isExactlyMatch: isExactlyMatch)
-                                        rowCandidates.append(rowCandidate)
+                                if let emoji: String = transform(codes: emojiCodeText) {
+                                        let instance = Candidate(emoji: emoji, cantonese: cantonese, romanization: romanization, input: text)
+                                        candidates.append(instance)
                                 }
                         }
                 }
-                sqlite3_finalize(queryStatement)
-                return rowCandidates
-        }
-
-        static func prefix(match text: String, count: Int = 100) -> [CoreCandidate] {
-                guard !text.isEmpty else { return [] }
-                var candidates: [CoreCandidate] = []
-                let queryString = "SELECT word, romanization FROM imetable WHERE prefix = \(text.hash) LIMIT \(count);"
-                var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
-                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let candidate: CoreCandidate = CoreCandidate(text: word, romanization: romanization, input: text)
-                                candidates.append(candidate)
-                        }
-                }
-                sqlite3_finalize(queryStatement)
                 return candidates
         }
+
+        private static func transform(codes: String) -> String? {
+                let blocks: [String] = codes.components(separatedBy: ".")
+                switch blocks.count {
+                case 0, 1:
+                        guard let character = character(from: codes) else { return nil }
+                        return String(character)
+                default:
+                        let characters = blocks.map({ character(from: $0) })
+                        let found = characters.compactMap({ $0 })
+                        guard found.count == characters.count else { return nil }
+                        return String(found)
+                }
+        }
+
+        /// Create a Character from the given Unicode Code Point String, e.g. 1F600
+        private static func character(from codePoint: String) -> Character? {
+                guard let u32 = UInt32(codePoint, radix: 16) else { return nil }
+                guard let scalar = Unicode.Scalar(u32) else { return nil }
+                return Character(scalar)
+        }
+}
+
+
+extension Engine {
+
+
+        /// Search special mark for text
+        /// - Parameter text: Input text
+        /// - Returns: Candidate, type == .specialMark
+        public static func searchMark(for text: String) -> Candidate? {
+                let key: String = text.lowercased()
+                guard let markText = specialMarks[key] else { return nil }
+                return Candidate(mark: markText)
+        }
+
+        private static let specialMarks: [String: String] = {
+                let values: [String] = [
+                        "iOS",
+                        "iPadOS",
+                        "macOS",
+                        "watchOS",
+                        "tvOS",
+                        "iPhone",
+                        "iPad",
+                        "iPod",
+                        "iMac",
+                        "MacBook",
+                        "HomePod",
+                        "AirPods",
+                        "AirTag",
+                        "iCloud",
+                        "FaceTime",
+                        "iMessage",
+                        "SwiftUI",
+                        "GitHub",
+                        "PayPal",
+                        "WhatsApp",
+                        "YouTube",
+                        "Canton",
+                        "Cantonese",
+                        "Cantonia"
+                ]
+                let keys: [String] = values.map({ $0.lowercased() })
+                let dict: [String: String] = Dictionary(uniqueKeysWithValues: zip(keys, values))
+                return dict
+        }()
 }
 
