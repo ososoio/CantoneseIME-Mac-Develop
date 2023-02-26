@@ -1,0 +1,14 @@
+name: CI
+on: [push, pull_request, release]
+
+# env:
+#   DEVELOPER_DIR: /Applications/Xcode_14.3.app/Contents/Developer
+
+jobs:
+  buildime:
+    name: Build IME
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Xcode Build
+        run: set -o pipefail && xcodebuild clean build -project CantoneseIME/CantoneseIME.xcodeproj -scheme CantoneseIME -configuration Debug -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
