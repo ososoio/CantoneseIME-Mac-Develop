@@ -23,6 +23,7 @@ private extension Array where Element == RowCandidate {
 extension Engine {
 
         public static func suggest(for text: String, segmentation: Segmentation) -> [Candidate] {
+                guard Engine.isDatabaseReady else { return [] }
                 switch text.count {
                 case 0:
                         return []
@@ -137,7 +138,7 @@ private extension Engine {
                 guard !text.isEmpty else { return [] }
                 let textHash: Int = text.replacingOccurrences(of: "y", with: "j").hash
                 var candidates: [CoreCandidate] = []
-                let queryString = "SELECT word, romanization FROM imetable WHERE shortcut = \(textHash) LIMIT \(count);"
+                let queryString = "SELECT word, romanization FROM lexicontable WHERE shortcut = \(textHash) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
@@ -177,7 +178,7 @@ private extension Engine {
         }
         private static func queryPing(for text: String) -> [CoreCandidate] {
                 var candidates: [CoreCandidate] = []
-                let queryString = "SELECT word, romanization FROM imetable WHERE ping = \(text.hash);"
+                let queryString = "SELECT word, romanization FROM lexicontable WHERE ping = \(text.hash);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
@@ -192,7 +193,7 @@ private extension Engine {
         }
         private static func queryPingWithLimit(for text: String, limit: Int) -> [CoreCandidate] {
                 var candidates: [CoreCandidate] = []
-                let queryString = "SELECT word, romanization FROM imetable WHERE ping = \(text.hash) LIMIT \(limit);"
+                let queryString = "SELECT word, romanization FROM lexicontable WHERE ping = \(text.hash) LIMIT \(limit);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
@@ -226,7 +227,7 @@ private extension Engine {
         }
         private static func queryRowCandidate(for text: String, isExactlyMatch: Bool) -> [RowCandidate] {
                 var rowCandidates: [RowCandidate] = []
-                let queryString = "SELECT rowid, word, romanization FROM imetable WHERE ping = \(text.hash);"
+                let queryString = "SELECT rowid, word, romanization FROM lexicontable WHERE ping = \(text.hash);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
