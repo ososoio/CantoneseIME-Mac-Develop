@@ -51,3 +51,9 @@ extension String {
                 return self.applyingTransform(StringTransform("Simplified-Traditional"), reverse: true) ?? self
         }
 }
+
+public extension String {
+        var isValid: Bool {
+                return self != "X"
+        }
+}

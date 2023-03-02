@@ -41,6 +41,8 @@ public struct Candidate: Hashable {
         /// Always be traditional characters. User invisible.
         public let lexiconText: String
 
+        public let notation: Notation?
+
         /// Candidate Type
         public let type: CandidateType
 
@@ -50,11 +52,12 @@ public struct Candidate: Hashable {
         ///   - romanization: Jyutping.
         ///   - input: User input for this Candidate.
         ///   - lexiconText: Lexicon Entry Cantonese word. User invisible.
-        public init(text: String, romanization: String, input: String, lexiconText: String) {
+        public init(text: String, romanization: String, input: String, lexiconText: String, notation: Notation? = nil) {
                 self.text = text
                 self.romanization = romanization
                 self.input = input
                 self.lexiconText = lexiconText
+                self.notation = notation
                 self.type = .cantonese
         }
 
@@ -65,6 +68,7 @@ public struct Candidate: Hashable {
                 self.romanization = mark
                 self.input = mark
                 self.lexiconText = mark
+                self.notation = nil
                 self.type = .specialMark
         }
 
@@ -79,6 +83,7 @@ public struct Candidate: Hashable {
                 self.romanization = romanization
                 self.input = input
                 self.lexiconText = cantonese
+                self.notation = nil
                 self.type = .emoji
         }
 
@@ -93,6 +98,7 @@ public struct Candidate: Hashable {
                 self.romanization = romanization
                 self.input = input
                 self.lexiconText = cantonese
+                self.notation = nil
                 self.type = .symbol
         }
 
@@ -109,6 +115,7 @@ public struct Candidate: Hashable {
                 self.romanization = secondaryCommentText
                 self.input = input
                 self.lexiconText = commentText
+                self.notation = nil
                 self.type = .compose
         }
 
@@ -178,11 +185,12 @@ extension CoreCandidate {
         ///   - text: Candidate word
         ///   - romanization: Jyutping
         ///   - input: Input text for this Candidate
-        init(text: String, romanization: String, input: String) {
+        init(text: String, romanization: String, input: String, notation: Notation? = nil) {
                 self.text = text
                 self.romanization = romanization
                 self.input = input
                 self.lexiconText = text
+                self.notation = notation
                 self.type = .cantonese
         }
 }

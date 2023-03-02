@@ -42,12 +42,11 @@ final class CantoneseIMEInputController: IMKInputController {
                 currentClient = sender as? IMKTextInput
                 currentOrigin = currentClient?.position
                 DispatchQueue.dataQueue.async {
-                        Engine.prepare(appVersion: AppMaster.version)
+                        Engine.prepare(appVersion: AppSettings.version)
                 }
                 if !bufferText.isEmpty {
                         bufferText = .empty
                 }
-                Notation.prepare()
         }
         override func deactivateServer(_ sender: Any!) {
                 markedText = .empty
@@ -154,7 +153,7 @@ final class CantoneseIMEInputController: IMKInputController {
                         let isStarting: Bool = processingText.isEmpty && !newValue.isEmpty
                         guard isStarting else { return }
                         DispatchQueue.dataQueue.async {
-                                Engine.prepare(appVersion: AppMaster.version)
+                                Engine.prepare(appVersion: AppSettings.version)
                         }
                 }
                 didSet {

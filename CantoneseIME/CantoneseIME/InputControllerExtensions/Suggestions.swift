@@ -8,15 +8,28 @@ extension CantoneseIMEInputController {
         private func transformed(_ items: [CoreIME.Candidate]) -> [ScolarCandidate] {
                 let candidates = items.map { item -> ScolarCandidate in
                         var comments: [Comment] = []
-                        guard let notation = Notation.entries.first(where: { $0.word == item.text && $0.jyutping == item.romanization }) else {
-                                return ScolarCandidate(input: item.input, text: item.text, romanization: item.romanization, comments: [], notation: nil)
+                        if let english = item.notation?.english, english.isValid {
+                                let comment = Comment(language: .English, text: english)
+                                comments.append(comment)
                         }
-                        if let english = notation.english {
-                                let englishComment: Comment = Comment(language: .English, text: english)
-                                comments.append(englishComment)
+                        if let urdu = item.notation?.urdu, urdu.isValid {
+                                let comment = Comment(language: .Urdu, text: urdu)
+                                comments.append(comment)
                         }
-                        // TODO: Other comments
-                        return ScolarCandidate(input: item.input, text: item.text, romanization: item.romanization, comments: comments, notation: notation)
+                        if let nepali = item.notation?.nepali, nepali.isValid {
+                                let comment = Comment(language: .Nepali, text: nepali)
+                                comments.append(comment)
+                        }
+                        if let hindi = item.notation?.hindi, hindi.isValid {
+                                let comment = Comment(language: .Hindi, text: hindi)
+                                comments.append(comment)
+                        }
+                        if let indonesian = item.notation?.indonesian, indonesian.isValid {
+                                let comment = Comment(language: .Indonesian, text: indonesian)
+                                comments.append(comment)
+                        }
+                        let enabledComments = comments.filter({ AppSettings.enabledCommentLanguages.contains($0.language) })
+                        return ScolarCandidate(input: item.input, text: item.text, romanization: item.romanization, comments: enabledComments, notation: item.notation)
                 }
                 return candidates
         }
@@ -32,7 +45,11 @@ extension CantoneseIMEInputController {
                         return Engine.suggest(for: droppedSeparator, segmentation: newSegmentation)
                 }()
                 let candidates = transformed(fetched)
-                let sortedCandidates = candidates.uniqued().sorted(by: { !$0.comments.isEmpty && $1.comments.isEmpty && ($0.input >= $1.input) })
+                let sortedCandidates = candidates.uniqued().sorted { (lhs, rhs) -> Bool in
+                        guard lhs.input.count == rhs.input.count else { return false }
+                        guard let lhsNotation = lhs.notation, let rhsNotation = rhs.notation else { return false }
+                        return lhsNotation.frequency > rhsNotation.frequency
+                }
                 push(sortedCandidates)
         }
 
@@ -140,6 +157,7 @@ struct FullComment: Hashable {
 */
 
 
+/*
 
 
 extension Notation {
@@ -279,3 +297,7 @@ struct Notation: Hashable {
         /// 印尼語
         let indonesian: String?
 }
+
+
+*/
+

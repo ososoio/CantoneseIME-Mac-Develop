@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreIME
 
 private extension Image {
         static let infoCircle: Image = Image(systemName: "info.circle")
@@ -14,7 +15,10 @@ struct CandidateLabel: View {
         @State private var isPopoverPresented: Bool = false
 
         private var shouldDisplayInfoCircle: Bool {
-                return candidate.notation != nil
+                guard let notation = candidate.notation else { return false }
+                let values: [Bool] = [notation.isSandhi, notation.partOfSpeech.isValid, notation.register.isValid, notation.label.isValid, notation.written.isValid, notation.colloquial.isValid]
+                let hasSomething: Bool = values.reduce(false, { $0 || $1 })
+                return hasSomething
         }
 
         var body: some View {
@@ -37,10 +41,10 @@ struct CandidateLabel: View {
                 .foregroundColor(shouldHighlight ? .white : .primary)
                 .background(shouldHighlight ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
                 .contentShape(Rectangle())
-                .onHover { isHovering in
-                        guard highlightedIndex != index else { return }
-                        highlightedIndex = index
-                }
+//                .onHover { isHovering in
+//                        guard highlightedIndex != index else { return }
+//                        highlightedIndex = index
+//                }
                 .popover(isPresented: $isPopoverPresented, attachmentAnchor: .point(.trailing), arrowEdge: .trailing) {
                         NotationView(notation: candidate.notation!).padding()
                 }
@@ -80,26 +84,25 @@ private struct NotationView: View {
 
         var body: some View {
                 VStack(alignment: .leading, spacing: 8) {
-                        if notation.isSandhi {
-                                Text(verbatim: "This is a sandi")
-                        }
-                        if let pos = notation.partOfSpeech {
-                                Text(verbatim: "Part of Speech: \(pos)")
-                        }
-                        if let register = notation.register {
-                                Text(verbatim: "Register: \(register)")
-                        }
-                        if let label = notation.label {
-                                Text(verbatim: "Label: \(label)")
-                        }
-                        if let written = notation.written {
-                                Text(verbatim: "Written: \(written)")
-                        }
-                        if let colloquial = notation.colloquial {
-                                Text(verbatim: "Colloquial: \(colloquial)")
-                        }
-                        if let note = notation.note {
-                                Text(verbatim: "Note: \(note)")
+                        VStack(alignment: .leading, spacing: 8) {
+                                if notation.isSandhi {
+                                        Text(verbatim: "This is a sandi")
+                                }
+                                if notation.partOfSpeech.isValid {
+                                        Text(verbatim: "Part of Speech: \(notation.partOfSpeech)")
+                                }
+                                if notation.register.isValid {
+                                        Text(verbatim: "Register: \(notation.register)")
+                                }
+                                if notation.label.isValid {
+                                        Text(verbatim: "Label: \(notation.label)")
+                                }
+                                if notation.written.isValid {
+                                        Text(verbatim: "Written: \(notation.written)")
+                                }
+                                if notation.colloquial.isValid {
+                                        Text(verbatim: "Colloquial: \(notation.colloquial)")
+                                }
                         }
                 }
         }

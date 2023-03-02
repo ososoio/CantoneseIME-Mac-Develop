@@ -79,29 +79,57 @@ private extension Engine {
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         static func createLexiconTable() {
-                let createTable: String = "CREATE TABLE lexicontable(word TEXT NOT NULL, romanization TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE lexicontable(word TEXT NOT NULL, romanization TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL, pronunciationorder INTEGER NOT NULL, sandhi INTEGER NOT NULL, literarycolloquial INTEGER NOT NULL, frequency INTEGER NOT NULL, altfrequency INTEGER NOT NULL, partofspeech TEXT NOT NULL, register TEXT NOT NULL, label TEXT NOT NULL, written TEXT NOT NULL, colloquial TEXT NOT NULL, english TEXT NOT NULL, explicit TEXT NOT NULL, urdu TEXT NOT NULL, nepali TEXT NOT NULL, hindi TEXT NOT NULL, indonesian TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
-                guard let url = Bundle.module.url(forResource: "lexicon", withExtension: "txt") else { return }
+                guard let url = Bundle.module.url(forResource: "notations", withExtension: "txt") else { return }
                 guard let content = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.map { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
-                        guard parts.count == 4 else { return nil }
+                        guard parts.count == 20 else { return nil }
                         let word = parts[0]
                         let romanization = parts[1]
                         let shortcut = parts[2]
                         let ping = parts[3]
-                        return "('\(word)', '\(romanization)', \(shortcut), \(ping))"
+                        let pronunciationorder = parts[4]
+                        let sandhi = parts[5]
+                        let literarycolloquial = parts[6]
+                        let frequency = parts[7]
+                        let altfrequency = parts[8]
+                        let partofspeech = parts[9]
+                        let register = parts[10]
+                        let label = parts[11]
+                        let written = parts[12]
+                        let colloquial = parts[13]
+                        let english = parts[14]
+                        let explicit = parts[15]
+                        let urdu = parts[16]
+                        let nepali = parts[17]
+                        let hindi = parts[18]
+                        let indonesian = parts[19]
+                        return "('\(word)', '\(romanization)', \(shortcut), \(ping), \(pronunciationorder), \(sandhi), \(literarycolloquial), \(frequency), \(altfrequency), '\(partofspeech)', '\(register)', '\(label)', '\(written)', '\(colloquial)', '\(english)', '\(explicit)', '\(urdu)', '\(nepali)', '\(hindi)', '\(indonesian)')"
                 }
-                let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
-                let insert: String = "INSERT INTO lexicontable (word, romanization, shortcut, ping) VALUES \(values);"
-                var insertStatement: OpaquePointer? = nil
-                defer { sqlite3_finalize(insertStatement) }
-                guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
-                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
+                let items = entries.compactMap({ $0 })
+                func insert(values: String) {
+                        let insert: String = "INSERT INTO lexicontable (word, romanization, shortcut, ping, pronunciationorder, sandhi, literarycolloquial, frequency, altfrequency, partofspeech, register, label, written, colloquial, english, explicit, urdu, nepali, hindi, indonesian) VALUES \(values);"
+                        var insertStatement: OpaquePointer? = nil
+                        defer { sqlite3_finalize(insertStatement) }
+                        guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
+                        guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
+                }
+                let range: Range<Int> = 0..<2000
+                let distance: Int = items.count / 2000
+                let parts = range.map({ number ->  ArraySlice<String> in
+                        let lastIndex: Int = number == 1999 ? items.count : ((number + 1) * distance)
+                        return items[(number * distance)..<lastIndex]
+                })
+                for part in parts {
+                        let values = part.joined(separator: ", ")
+                        insert(values: values)
+                }
         }
         static func createIndies() {
                 let commands: [String] = [

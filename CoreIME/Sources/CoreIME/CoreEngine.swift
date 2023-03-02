@@ -138,13 +138,31 @@ private extension Engine {
                 guard !text.isEmpty else { return [] }
                 let textHash: Int = text.replacingOccurrences(of: "y", with: "j").hash
                 var candidates: [CoreCandidate] = []
-                let queryString = "SELECT word, romanization FROM lexicontable WHERE shortcut = \(textHash) LIMIT \(count);"
+                let queryString = "SELECT word, romanization, pronunciationorder, sandhi, literarycolloquial, frequency, altfrequency, partofspeech, register, label, written, colloquial, english, explicit, urdu, nepali, hindi, indonesian FROM lexicontable WHERE shortcut = \(textHash) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let candidate = CoreCandidate(text: word, romanization: romanization, input: text)
+                                let pronunciationOrder: Int = Int(sqlite3_column_int64(queryStatement, 2))
+                                let sandhi: Int = Int(sqlite3_column_int64(queryStatement, 3))
+                                let literaryColloquial: Int = Int(sqlite3_column_int64(queryStatement, 4))
+                                let frequency: Int = Int(sqlite3_column_int64(queryStatement, 5))
+                                let altFrequency: Int = Int(sqlite3_column_int64(queryStatement, 6))
+                                let partOfSpeech: String = String(cString: sqlite3_column_text(queryStatement, 7))
+                                let register: String = String(cString: sqlite3_column_text(queryStatement, 8))
+                                let label: String = String(cString: sqlite3_column_text(queryStatement, 9))
+                                let written: String = String(cString: sqlite3_column_text(queryStatement, 10))
+                                let colloquial: String = String(cString: sqlite3_column_text(queryStatement, 11))
+                                let english: String = String(cString: sqlite3_column_text(queryStatement, 12))
+                                let explicit: String = String(cString: sqlite3_column_text(queryStatement, 13))
+                                let urdu: String = String(cString: sqlite3_column_text(queryStatement, 14))
+                                let nepali: String = String(cString: sqlite3_column_text(queryStatement, 15))
+                                let hindi: String = String(cString: sqlite3_column_text(queryStatement, 16))
+                                let indonesian: String = String(cString: sqlite3_column_text(queryStatement, 17))
+                                let isSandhi: Bool = sandhi == 1
+                                let notation = Notation(word: word, jyutping: romanization, pronunciationOrder: pronunciationOrder, isSandhi: isSandhi, literaryColloquial: literaryColloquial, frequency: frequency, altFrequency: altFrequency, partOfSpeech: partOfSpeech, register: register, label: label, written: written, colloquial: colloquial, english: english, explicit: explicit, urdu: urdu, nepali: nepali, hindi: hindi, indonesian: indonesian)
+                                let candidate = CoreCandidate(text: word, romanization: romanization, input: text, notation: notation)
                                 candidates.append(candidate)
                         }
                 }
@@ -178,13 +196,31 @@ private extension Engine {
         }
         private static func queryPing(for text: String) -> [CoreCandidate] {
                 var candidates: [CoreCandidate] = []
-                let queryString = "SELECT word, romanization FROM lexicontable WHERE ping = \(text.hash);"
+                let queryString = "SELECT word, romanization, pronunciationorder, sandhi, literarycolloquial, frequency, altfrequency, partofspeech, register, label, written, colloquial, english, explicit, urdu, nepali, hindi, indonesian FROM lexicontable WHERE ping = \(text.hash);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let candidate = CoreCandidate(text: word, romanization: romanization, input: text)
+                                let pronunciationOrder: Int = Int(sqlite3_column_int64(queryStatement, 2))
+                                let sandhi: Int = Int(sqlite3_column_int64(queryStatement, 3))
+                                let literaryColloquial: Int = Int(sqlite3_column_int64(queryStatement, 4))
+                                let frequency: Int = Int(sqlite3_column_int64(queryStatement, 5))
+                                let altFrequency: Int = Int(sqlite3_column_int64(queryStatement, 6))
+                                let partOfSpeech: String = String(cString: sqlite3_column_text(queryStatement, 7))
+                                let register: String = String(cString: sqlite3_column_text(queryStatement, 8))
+                                let label: String = String(cString: sqlite3_column_text(queryStatement, 9))
+                                let written: String = String(cString: sqlite3_column_text(queryStatement, 10))
+                                let colloquial: String = String(cString: sqlite3_column_text(queryStatement, 11))
+                                let english: String = String(cString: sqlite3_column_text(queryStatement, 12))
+                                let explicit: String = String(cString: sqlite3_column_text(queryStatement, 13))
+                                let urdu: String = String(cString: sqlite3_column_text(queryStatement, 14))
+                                let nepali: String = String(cString: sqlite3_column_text(queryStatement, 15))
+                                let hindi: String = String(cString: sqlite3_column_text(queryStatement, 16))
+                                let indonesian: String = String(cString: sqlite3_column_text(queryStatement, 17))
+                                let isSandhi: Bool = sandhi == 1
+                                let notation = Notation(word: word, jyutping: romanization, pronunciationOrder: pronunciationOrder, isSandhi: isSandhi, literaryColloquial: literaryColloquial, frequency: frequency, altFrequency: altFrequency, partOfSpeech: partOfSpeech, register: register, label: label, written: written, colloquial: colloquial, english: english, explicit: explicit, urdu: urdu, nepali: nepali, hindi: hindi, indonesian: indonesian)
+                                let candidate = CoreCandidate(text: word, romanization: romanization, input: text, notation: notation)
                                 candidates.append(candidate)
                         }
                 }
@@ -227,14 +263,32 @@ private extension Engine {
         }
         private static func queryRowCandidate(for text: String, isExactlyMatch: Bool) -> [RowCandidate] {
                 var rowCandidates: [RowCandidate] = []
-                let queryString = "SELECT rowid, word, romanization FROM lexicontable WHERE ping = \(text.hash);"
+                let queryString = "SELECT rowid, word, romanization, pronunciationorder, sandhi, literarycolloquial, frequency, altfrequency, partofspeech, register, label, written, colloquial, english, explicit, urdu, nepali, hindi, indonesian FROM lexicontable FROM lexicontable WHERE ping = \(text.hash);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let rowid: Int = Int(sqlite3_column_int64(queryStatement, 0))
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 1))
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 2))
-                                let candidate: CoreCandidate = CoreCandidate(text: word, romanization: romanization, input: text)
+                                let pronunciationOrder: Int = Int(sqlite3_column_int64(queryStatement, 3))
+                                let sandhi: Int = Int(sqlite3_column_int64(queryStatement, 4))
+                                let literaryColloquial: Int = Int(sqlite3_column_int64(queryStatement, 5))
+                                let frequency: Int = Int(sqlite3_column_int64(queryStatement, 6))
+                                let altFrequency: Int = Int(sqlite3_column_int64(queryStatement, 7))
+                                let partOfSpeech: String = String(cString: sqlite3_column_text(queryStatement, 8))
+                                let register: String = String(cString: sqlite3_column_text(queryStatement, 9))
+                                let label: String = String(cString: sqlite3_column_text(queryStatement, 10))
+                                let written: String = String(cString: sqlite3_column_text(queryStatement, 11))
+                                let colloquial: String = String(cString: sqlite3_column_text(queryStatement, 12))
+                                let english: String = String(cString: sqlite3_column_text(queryStatement, 13))
+                                let explicit: String = String(cString: sqlite3_column_text(queryStatement, 14))
+                                let urdu: String = String(cString: sqlite3_column_text(queryStatement, 15))
+                                let nepali: String = String(cString: sqlite3_column_text(queryStatement, 16))
+                                let hindi: String = String(cString: sqlite3_column_text(queryStatement, 17))
+                                let indonesian: String = String(cString: sqlite3_column_text(queryStatement, 18))
+                                let isSandhi: Bool = sandhi == 1
+                                let notation = Notation(word: word, jyutping: romanization, pronunciationOrder: pronunciationOrder, isSandhi: isSandhi, literaryColloquial: literaryColloquial, frequency: frequency, altFrequency: altFrequency, partOfSpeech: partOfSpeech, register: register, label: label, written: written, colloquial: colloquial, english: english, explicit: explicit, urdu: urdu, nepali: nepali, hindi: hindi, indonesian: indonesian)
+                                let candidate: CoreCandidate = CoreCandidate(text: word, romanization: romanization, input: text, notation: notation)
                                 let rowCandidate: RowCandidate = RowCandidate(candidate: candidate, row: rowid, isExactlyMatch: isExactlyMatch)
                                 rowCandidates.append(rowCandidate)
                         }

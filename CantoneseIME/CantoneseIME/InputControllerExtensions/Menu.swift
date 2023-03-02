@@ -95,7 +95,7 @@ struct SettingsKey {
 
 struct AppSettings {
 
-        static let commentLanguages: [Language] = [.English, .Hindi, .Indonesian, .Nepali, .Urdu ]
+        static let commentLanguages: [Language] = [.English, .Urdu, .Nepali, .Hindi, .Indonesian ]
 
         private static let defaultEnabledCommentLanguages: [Language] = [.English]
 
@@ -119,6 +119,13 @@ struct AppSettings {
         }
 
         static let pageSize: Int = 9
+
+        /// Example: 1.0.1 (23)
+        static let version: String = {
+                let marketingVersion: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "0.1.0"
+                let currentProjectVersion: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "1"
+                return marketingVersion + " (" + currentProjectVersion + ") preview 0.13.0"
+        }()
 }
 
 extension Language {

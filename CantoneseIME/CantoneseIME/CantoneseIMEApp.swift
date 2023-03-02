@@ -6,15 +6,6 @@ extension DispatchQueue {
         static let dataQueue: DispatchQueue = DispatchQueue(label: "hk.eduhk.inputmethod.Jyutping.data", qos: .userInitiated)
 }
 
-struct AppMaster {
-        /// Example: 1.0.1 (23)
-        static let version: String = {
-                let marketingVersion: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "0.1.0"
-                let currentProjectVersion: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "1"
-                return marketingVersion + " (" + currentProjectVersion + ") preview 1"
-        }()
-}
-
 final class PrincipalApplication: NSApplication {
 
         private let appDelegate = AppDelegate()
@@ -38,7 +29,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 let name: String = "hk_eduhk_inputmethod_Jyutping_1_Connection"
                 server = IMKServer(name: name, bundleIdentifier: Bundle.main.bundleIdentifier)
                 DispatchQueue.dataQueue.async {
-                        Engine.prepare(appVersion: AppMaster.version)
+                        Engine.prepare(appVersion: AppSettings.version)
                 }
         }
 
