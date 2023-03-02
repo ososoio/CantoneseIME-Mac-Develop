@@ -149,13 +149,6 @@ final class CantoneseIMEInputController: IMKInputController {
                 }
         }
         private(set) lazy var processingText: String = .empty {
-                willSet {
-                        let isStarting: Bool = processingText.isEmpty && !newValue.isEmpty
-                        guard isStarting else { return }
-                        DispatchQueue.dataQueue.async {
-                                Engine.prepare(appVersion: AppSettings.version)
-                        }
-                }
                 didSet {
                         switch processingText.first {
                         case .none:
@@ -227,7 +220,7 @@ final class CantoneseIMEInputController: IMKInputController {
         }
 
         /// Flexible Segmentation
-        private(set)  var segmentation: Segmentation = []
+        private(set) var segmentation: Segmentation = []
 }
 
 /// DisplayCandidate page transformation

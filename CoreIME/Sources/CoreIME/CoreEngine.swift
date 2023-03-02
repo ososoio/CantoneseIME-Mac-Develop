@@ -94,7 +94,7 @@ extension Engine {
                 })
                 let prefixes: [CoreCandidate] = anchorsArray.map({ shortcut(for: $0) }).flatMap({ $0 })
                         .filter({ $0.romanization.removedSpacesTones().hasPrefix(text) })
-                        .map({ CoreCandidate(text: $0.text, romanization: $0.romanization, input: text) })
+                        .map({ CoreCandidate(text: $0.text, romanization: $0.romanization, input: text, notation: $0.notation) })
                 guard prefixes.isEmpty else { return fullProcessed + prefixes + candidates + backup }
                 let tailText: String = String(text.dropFirst(firstInputCount))
                 let tailCandidates = processVerbatim(tailText)
@@ -170,18 +170,12 @@ private extension Engine {
                 return candidates
         }
 
-        static func match(for text: String, limit: Int? = nil) -> [CoreCandidate] {
+        static func match(for text: String) -> [CoreCandidate] {
                 let tones: String = text.tones
                 let hasTones: Bool = !tones.isEmpty
                 let ping: String = hasTones ? text.removedTones() : text
                 guard !(ping.isEmpty) else { return [] }
-                let candidates: [CoreCandidate] = {
-                        if let limit {
-                                return queryPingWithLimit(for: ping, limit: limit)
-                        } else {
-                                return queryPing(for: ping)
-                        }
-                }()
+                let candidates: [CoreCandidate] = queryPing(for: text, ping: ping)
                 guard hasTones else { return candidates }
                 let sameTones = candidates.filter({ $0.romanization.tones == tones })
                 guard sameTones.isEmpty else { return sameTones }
@@ -194,9 +188,9 @@ private extension Engine {
                 })
                 return filtered
         }
-        private static func queryPing(for text: String) -> [CoreCandidate] {
+        private static func queryPing(for text: String, ping: String) -> [CoreCandidate] {
                 var candidates: [CoreCandidate] = []
-                let queryString = "SELECT word, romanization, pronunciationorder, sandhi, literarycolloquial, frequency, altfrequency, partofspeech, register, label, written, colloquial, english, explicit, urdu, nepali, hindi, indonesian FROM lexicontable WHERE ping = \(text.hash);"
+                let queryString = "SELECT word, romanization, pronunciationorder, sandhi, literarycolloquial, frequency, altfrequency, partofspeech, register, label, written, colloquial, english, explicit, urdu, nepali, hindi, indonesian FROM lexicontable WHERE ping = \(ping.hash);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
@@ -227,28 +221,13 @@ private extension Engine {
                 sqlite3_finalize(queryStatement)
                 return candidates
         }
-        private static func queryPingWithLimit(for text: String, limit: Int) -> [CoreCandidate] {
-                var candidates: [CoreCandidate] = []
-                let queryString = "SELECT word, romanization FROM lexicontable WHERE ping = \(text.hash) LIMIT \(limit);"
-                var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
-                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let candidate = CoreCandidate(text: word, romanization: romanization, input: text)
-                                candidates.append(candidate)
-                        }
-                }
-                sqlite3_finalize(queryStatement)
-                return candidates
-        }
 
         static func matchRowCandidate(for text: String, isExactlyMatch: Bool) -> [RowCandidate] {
                 let tones: String = text.tones
                 let hasTones: Bool = !tones.isEmpty
                 let ping: String = hasTones ? text.removedTones() : text
                 guard !(ping.isEmpty) else { return [] }
-                let candidates = queryRowCandidate(for: ping, isExactlyMatch: isExactlyMatch)
+                let candidates = queryRowCandidate(for: text, ping: ping, isExactlyMatch: isExactlyMatch)
                 guard hasTones else { return candidates }
                 let sameTones = candidates.filter({ $0.candidate.romanization.tones == tones })
                 guard sameTones.isEmpty else { return sameTones }
@@ -261,9 +240,9 @@ private extension Engine {
                 })
                 return filtered
         }
-        private static func queryRowCandidate(for text: String, isExactlyMatch: Bool) -> [RowCandidate] {
+        private static func queryRowCandidate(for text: String, ping: String, isExactlyMatch: Bool) -> [RowCandidate] {
                 var rowCandidates: [RowCandidate] = []
-                let queryString = "SELECT rowid, word, romanization, pronunciationorder, sandhi, literarycolloquial, frequency, altfrequency, partofspeech, register, label, written, colloquial, english, explicit, urdu, nepali, hindi, indonesian FROM lexicontable FROM lexicontable WHERE ping = \(text.hash);"
+                let queryString = "SELECT rowid, word, romanization, pronunciationorder, sandhi, literarycolloquial, frequency, altfrequency, partofspeech, register, label, written, colloquial, english, explicit, urdu, nepali, hindi, indonesian FROM lexicontable WHERE ping = \(ping.hash);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {

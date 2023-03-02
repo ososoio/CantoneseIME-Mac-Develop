@@ -124,7 +124,7 @@ struct AppSettings {
         static let version: String = {
                 let marketingVersion: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "0.1.0"
                 let currentProjectVersion: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "1"
-                return marketingVersion + " (" + currentProjectVersion + ") preview 0.13.0"
+                return marketingVersion + " (" + currentProjectVersion + ")"
         }()
 }
 
