@@ -1,61 +1,61 @@
 {
   "images" : [
     {
-      "filename" : "scolar-icon-16px.png",
+      "filename" : "ime-icon-16px.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "16x16"
     },
     {
-      "filename" : "scolar-icon-16px@2.png",
+      "filename" : "ime-icon-16px@2.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "16x16"
     },
     {
-      "filename" : "scolar-icon-32px.png",
+      "filename" : "ime-icon-32px.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "32x32"
     },
     {
-      "filename" : "scolar-icon-32px@2.png",
+      "filename" : "ime-icon-32px@2.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "32x32"
     },
     {
-      "filename" : "scolar-icon-128px.png",
+      "filename" : "ime-icon-128px.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "128x128"
     },
     {
-      "filename" : "scolar-icon-128px@2.png",
+      "filename" : "ime-icon-128px@2.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "128x128"
     },
     {
-      "filename" : "scolar-icon-256px.png",
+      "filename" : "ime-icon-256px.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "256x256"
     },
     {
-      "filename" : "scolar-icon-256px@2.png",
+      "filename" : "ime-icon-256px@2.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
-      "filename" : "scolar-icon-512px.png",
+      "filename" : "ime-icon-512px.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
-      "filename" : "scolar-icon-512px@2.png",
+      "filename" : "ime-icon-512px@2.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"

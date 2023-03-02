@@ -3,10 +3,10 @@ import CoreIME
 
 extension CantoneseIMEInputController {
 
-        private typealias ScolarCandidate = Candidate
+        private typealias AppCandidate = Candidate
 
-        private func transformed(_ items: [CoreIME.Candidate]) -> [ScolarCandidate] {
-                let candidates = items.map { item -> ScolarCandidate in
+        private func transformed(_ items: [CoreIME.Candidate]) -> [AppCandidate] {
+                let candidates = items.map { item -> AppCandidate in
                         var comments: [Comment] = []
                         if let english = item.notation?.english, english.isValid {
                                 let comment = Comment(language: .English, text: english)
@@ -29,7 +29,7 @@ extension CantoneseIMEInputController {
                                 comments.append(comment)
                         }
                         let enabledComments = comments.filter({ AppSettings.enabledCommentLanguages.contains($0.language) })
-                        return ScolarCandidate(input: item.input, text: item.text, romanization: item.romanization, comments: enabledComments, notation: item.notation)
+                        return AppCandidate(input: item.input, text: item.text, romanization: item.romanization, comments: enabledComments, notation: item.notation)
                 }
                 return candidates
         }
