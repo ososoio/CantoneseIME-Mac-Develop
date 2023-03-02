@@ -29,3 +29,6 @@
 *.ttf binary
 *.ttc binary
 *.otc binary
+
+# Swift Package Resources
+/CoreIME/Sources/CoreIME/Resources/** binary
